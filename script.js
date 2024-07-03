@@ -6,14 +6,14 @@ const textoResultado = document.querySelector(".texto-resultado");
 
 const perguntas = [
     {
-        enunciado: "no futuro,",
+        enunciado: "Avanços da IA A Inteligência Artificial (IA) tem avançado rapidamente nos últimos anos, trazendo consigo novas possibilidades e desafios. Vantagens: Automação de tarefas: A IA pode automatizar tarefas repetitivas e demoradas, liberando tempo para que os humanos se concentrem em atividades mais complexas. Melhoria da tomada de decisão: Os algoritmos de IA podem analisar grandes quantidades de dados e identificar padrões que os humanos podem não conseguir ver, auxiliando na tomada de decisões mais informadas. Personalização: A IA pode personalizar experiências para usuários individuais, fornecendo recomendações e conteúdo sob medida. Desafios: Perda de empregos: A automação pode levar à perda de empregos em alguns setores, à medida que as máquinas assumem tarefas anteriormente realizadas por humanos. Preconceito: Os algoritmos de IA podem ser tendenciosos se forem treinados com dados tendenciosos, levando a resultados injustos",
         alternativas: [
             {
-                texto: "Isso é assustador!",
+                texto: "Automação!",
                 afirmacao: "afirmação"
             },
             {
-                texto: "Isso é maravilhoso!",
+                texto: "Avanços!",
                 afirmacao: "afirmação"
             }
         ]
@@ -74,7 +74,6 @@ const perguntas = [
 
 let atual = 0;
 let perguntaAtual;
-let historiaFinal = "";
 
 function mostraPergunta() {
     perguntaAtual = perguntas[atual];
@@ -82,20 +81,15 @@ function mostraPergunta() {
     mostraAlternativas();
 }
 
-function mostraAlternativas(){
-    for(const alternativa of perguntaAtual.alternativas) {
+function mostraAlternativas() {
+    for (const alternativa of perguntaAtual.alternativas) {
         const botaoAlternativas = document.createElement("button");
         botaoAlternativas.textContent = alternativa.texto;
-        botaoAlternativas.addEventListener("click", () => respostaSelecionada(alternativa));
+        botaoAlternativas.addEventListener("click", function () {
+            atual++;
+            mostraPergunta();
+        })
         caixaAlternativas.appendChild(botaoAlternativas);
     }
 }
-
-function respostaSelecionada(opcaoSelecionada){
-    const afirmacoes = opcaoSelecionada.afirmacoes;
-    historiaFinal = afirmacoes;
-    atual++;
-    mostraPergunta();
-}
-
 mostraPergunta();
